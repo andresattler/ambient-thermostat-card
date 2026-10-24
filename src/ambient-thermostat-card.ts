@@ -167,8 +167,10 @@ export class AmbientThermostatCard extends LitElement {
         <span class="meta">
           <span>${t("room")}</span>
           ${view.humidity !== undefined
-            ? html`<span class="dot">·</span>${dropIcon}
-                <span>${t("humidity", { value: `${Math.round(view.humidity)}%` })}</span>`
+            ? html`<span class="dot">·</span>
+                <span class="humidity">
+                  ${dropIcon}<span>${t("humidity", { value: `${Math.round(view.humidity)}%` })}</span>
+                </span>`
             : nothing}
         </span>
       </div>

@@ -71,8 +71,12 @@ export const styles = css`
   }
 
   /* Header: name + status */
+  /*
+   * Rows use min-height, never height: with OS/app text scaling (accessibility "larger
+   * text") fonts grow but fixed boxes don't, and text would overflow into the next row.
+   */
   .header {
-    height: 20px;
+    min-height: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -121,7 +125,7 @@ export const styles = css`
 
   /* Main row: current temperature + target stepper */
   .main {
-    height: 68px;
+    min-height: 68px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -152,8 +156,9 @@ export const styles = css`
   }
   .meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
+    gap: 2px 6px;
     font-size: 13px;
     line-height: 16px;
     color: var(--_text-muted);
@@ -161,6 +166,11 @@ export const styles = css`
   }
   .dot {
     color: var(--_text-dim);
+  }
+  .humidity {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .target {
@@ -180,7 +190,7 @@ export const styles = css`
     letter-spacing: 0.04em;
   }
   .stepper {
-    height: 44px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     border-radius: 22px;
@@ -216,7 +226,8 @@ export const styles = css`
   }
   .step {
     width: 44px;
-    height: 44px;
+    min-height: 44px;
+    align-self: stretch;
     border-radius: 50%;
     color: var(--_text);
     display: flex;
@@ -229,7 +240,7 @@ export const styles = css`
 
   /* Mode selector */
   .modes {
-    height: 44px;
+    min-height: 44px;
     margin-top: 4px;
     display: flex;
     gap: 4px;
