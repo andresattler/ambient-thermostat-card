@@ -1,0 +1,42 @@
+# Actions → Release → "Run workflow" with a version (e.g. 0.2.0).
+# Builds the card, commits the version bump + dist/ambient-thermostat-card.js,
+# tags v<version> and publishes a GitHub release.
+#
+# The built file is committed (not attached as a release asset) on purpose:
+# HACS ≤ 2.0.5 can't download release assets because GitHub's redirect sends a
+# >8 KB header (hacs/integration#5643). Without assets, HACS downloads the file
+# from the tagged commit instead.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version without the leading v, e.g. 0.2.0"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun pm pkg set version="$VERSION"
+      - run: bun run check
+      - name: Commit, tag and publish
+        run: |
+          mkdir -p dist && cp build/ambient-thermostat-card.js dist/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json dist/ambient-thermostat-card.js
+          git commit -m "Release v$VERSION"
+          git tag "v$VERSION"
+          git push origin HEAD "v$VERSION"
+          gh release create "v$VERSION" --title "v$VERSION" --generate-notes

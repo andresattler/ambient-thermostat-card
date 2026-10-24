@@ -1,0 +1,24 @@
+{
+  "name": "ambient-thermostat-card",
+  "version": "0.1.0",
+  "description": "A calm, minimal Home Assistant thermostat card made for Better Thermostat.",
+  "type": "module",
+  "license": "MIT",
+  "author": "andresattler",
+  "repository": "github:andresattler/ambient-thermostat-card",
+  "keywords": ["home-assistant", "lovelace", "custom-card", "better-thermostat", "thermostat", "hacs"],
+  "scripts": {
+    "dev": "bun --hot dev/index.html",
+    "build": "NODE_ENV=production bun build.ts",
+    "test": "bun test",
+    "typecheck": "tsc",
+    "check": "bun run typecheck && bun test && bun run build"
+  },
+  "dependencies": {
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "^7.0.2"
+  }
+}

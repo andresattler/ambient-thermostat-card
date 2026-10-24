@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ambient Thermostat Card · dev</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        background: #111;
+        color: #9e9e9e;
+        font: 13px/16px Roboto, system-ui, sans-serif;
+      }
+      h2 {
+        margin: 32px 0 12px;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 360px);
+        gap: 24px;
+      }
+      .grid > div {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 12px;
+        color: #cfcfcf;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Design states</h2>
+    <div class="grid" id="states"></div>
+
+    <h2>Interactive · simulated Better Thermostat</h2>
+    <div class="grid" id="interactive"></div>
+    <div class="controls" id="controls"></div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
